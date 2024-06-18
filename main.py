@@ -8,13 +8,17 @@ def find_non_numeric_values(root_dir, columns):
             if filename.endswith('.csv'):
                 filepath = os.path.join(dirpath, filename)
                 try:
-                    df = pd.read_csv(filepath, encoding='latin1',
-                                     low_memory=False)  # specify the correct encoding if known
+
+                    # specify the correct encoding if known
+                    df = pd.read_csv(filepath, encoding='latin1', low_memory=False)
+                    print(df.columns)
+
                     # Ensure columns to check are present in the dataframe
                     missing_columns = [col for col in columns if col not in df.columns]
                     if missing_columns:
                         print(f"File {filename} is missing: {missing_columns}")
                         continue
+                    
                     # Check for non-numeric values in specified columns
                     non_numeric_rows = df[
                         ~df[columns].apply(lambda x: pd.to_numeric(x, errors='coerce')).notna().all(axis=1)]
@@ -26,8 +30,8 @@ def find_non_numeric_values(root_dir, columns):
 
 
 if __name__ == "__main__":
-    root_directory = "C:\\Users\\FRE\\Unilever\\Ethiopia Business Dashboard - Documents\\General\\Ethiopia " \
+    root_directory = "C:\\Users\\Administrator\\Documents\\PBI Data Test" \
                     # "Dashboard\\Monthly data dumps\\Secondary\\2024"  # Change this to the root directory you want
     # to search
-    columns_to_check = ["Material"]
+    columns_to_check = ["DistributorID"]
     find_non_numeric_values(root_directory, columns_to_check)

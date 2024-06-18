@@ -11,8 +11,8 @@ def find_and_replace_in_files(root_dir, columns, search_value, replace_value):
             if filename.endswith('.csv'):
                 filepath = os.path.join(dirpath, filename)
                 try:
-                    df = pd.read_csv(filepath, encoding='latin1',
-                                     low_memory=False)  # specify the correct encoding if known
+                    # specify the correct encoding if known
+                    df = pd.read_csv(filepath, encoding='latin1', low_memory=False)
                     changes = 0
 
                     # Ensure columns to check are present in the dataframe
@@ -45,9 +45,9 @@ def find_and_replace_in_files(root_dir, columns, search_value, replace_value):
 
 
 if __name__ == "__main__":
-    root_directory = "C:\\Users\\FRE\\Documents\\Python CSV files testing\\"  # Change this to the root directory you want to search
-    columns_to_check = ["DistributorID"]  # Columns to search in
-    search_value = "15582315"  # Value to search for
-    replace_value = ""  # Value to replace with
+    root_directory = "C:\\Users\\Administrator\\Documents\\PBI Data Test"  # Change this to the root directory you want to search
+    columns_to_check = ["OutletID"]  # Columns to search in
+    search_value = 'ID-'  # Value to search for
+    replace_value = 'ID -'  # Value to replace with
 
     find_and_replace_in_files(root_directory, columns_to_check, search_value, replace_value)

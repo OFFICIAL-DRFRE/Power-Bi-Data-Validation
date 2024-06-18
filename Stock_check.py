@@ -9,8 +9,9 @@ def find_non_int64_values(root_dir, columns):
             if filename.endswith('.csv'):
                 filepath = os.path.join(dirpath, filename)
                 try:
-                    df = pd.read_csv(filepath, encoding='latin1',
-                                     low_memory=False)  # specify the correct encoding if known
+                    # specify the correct encoding if known
+                    df = pd.read_csv(filepath, encoding='latin1', low_memory=False)
+
                     # Ensure columns to check are present in the dataframe
                     missing_columns = [col for col in columns if col not in df.columns]
                     if missing_columns:
